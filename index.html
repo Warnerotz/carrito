@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+Preguntas:
+
+si pongo display inline en el juego donde se va el fondo? mejor inline o mejor block
+-->
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <!-- --------------------------------------------------  -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/codigo.js">
+    </script>
+
+    <title>Carrito</title>
+</head>
+
+<body>
+    <div id="item_container">
+        <div class="item" id="i1">
+            <img src="img/camiseta1.jpg" alt="descripción i1" />
+            <label class="title">Camiseta 1</label>
+            <label class="price">20 €</label>
+            <label class="stock">Stock 10</label>
+        </div>
+        <div class="item" id="i2">
+            <img src="img/reloj2.jpg" alt="descripción i2" />
+            <label class="title">Reloj 2</label>
+            <label class="price">24 €</label>
+            <label class="stock">Stock 10</label>
+        </div>
+        <div class="item" id="i3">
+            <img src="img/camiseta3.jpg" alt="descripción i3" />
+            <label class="title">Camiseta 3</label>
+            <label class="price">18 €</label>
+            <label class="stock">Stock 10</label>
+        </div>
+        <div class="item" id="i4">
+            <img src="img/reloj4.jpg" alt="descripción i4" />
+            <label class="title">Reloj 4</label>
+            <label class="price">30 €</label>
+            <label class="stock">Stock 10</label>
+        </div>
+        <div class="item" id="i5">
+            <img src="img/reloj5.jpg" alt="descripción i5" />
+            <label class="title">Reloj 5</label>
+            <label class="price">28 €</label>
+            <label class="stock">Stock 10</label>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="cart_container">
+        <div id="cart_title">
+            <span>Carrito</span>
+            <div class="clear"></div>
+        </div>
+        <div id="cart_toolbar">
+            <div id="cart_items" class="back"></div>
+        </div>
+        <div id="navigate">
+            <div id="nav_left">
+                <button id="btn_comprar" title="Confirma la compra de los artículos">Comprar</button>
+                <button id="btn_prev" title="Desplaza el carrito hacia la izquierda">&lt;</button>
+                <button id="btn_next" title="Desplaza el carrito hacia la derecha">&gt;</button>
+                <button id="btn_clear" title="Vacia el carrito">Vaciar</button>
+            </div>
+            <div id="nav_right">
+                <span class="sptext">
+					<label>Compras </label><input id="citem" value="0" readonly title="Número de productos comprados"/>
+				</span>
+                <span class="sptext">
+					<label>Precio </label><input id="cprice" value="0 €" readonly  title="Precio total de los productos comprados"/>
+				</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>
