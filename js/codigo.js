@@ -3,7 +3,10 @@ $(document).ready(function () {
     var cantProd = 0;
     //precio total carro
     var preTot = 0;
-
+    //variables para la posicion del contenedor del carrito
+    var posIni = $('#cart_items').offset();
+    var tamanhoIni = $('#cart_items').css("width").split("px");
+    tamanhoIni = tamanhoIni[0];
     //$('.item').dblclick(dobleClick); 
     ponerDobleClick($(".item"));
     //$('.item').bind("dblclick", dobleClick);
@@ -23,7 +26,7 @@ $(document).ready(function () {
         anhadirPrecio($(this));
         clonar($(this), $(this).clone());
         aumentarTamanho();
-        ponerDobleClick($(this));
+        
 
 
 
@@ -49,6 +52,7 @@ $(document).ready(function () {
             nodo.find('.stock').text("Stock " + cant);
             nodo.find('.stock').addClass("agotado");
         }
+        ponerDobleClick(nodo);
 
     }
     //funcion para añadir cantidad de productos comprados.
@@ -172,13 +176,14 @@ $(document).ready(function () {
     }
     //funcion para realizar el desplazamiento
     function desplazar() {
-        var tam = $('#cart_items').children().length
-        var pos = $('#cart_items').offset();
-        console.log($('#cart_items').offset());
+        
+        var pos  = $("#cart_items").offset()
+        var tamanho = $('#cart_items').css("width").split("px");
+        tamanho = tamanho[0];
         switch ($(this).attr("id")) {
             case "btn_prev":
                 {
-                    if (pos.left < 552) {
+                    if (pos.left < posIni.left) {
                         pos.left += 50;
                         $('#cart_items').offset({
                             top: pos.top,
@@ -192,19 +197,25 @@ $(document).ready(function () {
                 }
             case "btn_next":
                 {   
+                    var sumaTamInicial = parseInt(pos.left)+parseInt(tamanho);
+                    var sumaTamActual = parseInt(posIni.left)+parseInt(tamanhoIni);
                     
-                    pos.left -= 50;
+                    if(sumaTamInicial>sumaTamActual){
+                       pos.left -= 50;
                     $('#cart_items').offset({
                         top: pos.top,
                         left: pos.left
-                    });
+                    }); 
+                        
+                 
+                    
                     break;
-                }
-        }
+                    }
+            }
+
+      }
+
 
     }
-
-
-
 
 });
