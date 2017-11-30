@@ -206,43 +206,7 @@ $(document).ready(function () {
 
 
     }
-    function desplazar(esUltimo) {
-        
-        var pos  = $("#cart_items").offset()
-        var tamanho = $('#cart_items').css("width").split("px");
-        tamanho = tamanho[0];
-        switch ($(this).attr("id")) {
-            case "btn_prev":
-                {
-                    if (pos.left < posIni.left) {
-                        pos.left += 60;
-                        $('#cart_items').offset({
-                            top: pos.top,
-                            left: pos.left
-                        });
-                    }
-
-                    break;
-                }
-            case "btn_next":
-                {   
-                    var sumaTamInicial = parseInt(pos.left)+parseInt(tamanho);
-                    var sumaTamActual = parseInt(posIni.left)+parseInt(tamanhoIni);
-                    
-                    if(sumaTamInicial>sumaTamActual){
-                       pos.left -= 60;
-                    $('#cart_items').offset({
-                        top: pos.top,
-                        left: pos.left
-                    }); 
-                    break;
-                    }
-            }
-
-      }
-
-
-    }
+  
     //funcion que comprueba el numero de articulos y si es <=4 vuelve al tamaño inicial
     function comprobarTamanho(){
         var tamanho = $('#cart_items').children().length;
