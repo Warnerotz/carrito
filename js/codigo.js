@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     //cantida productos carro
     var cantProd = 0;
     //precio total carro
@@ -19,9 +20,9 @@ $(document).ready(function () {
     $("#btn_prev").on("click", desplazar);
     $("#btn_next").on("click", desplazar);
 
-    function dobleClick() {
+    function dobleClick() {        
         var stock = getStock($(this).find('.stock').text());
-        restarStock(stock, $(this));
+        restarStock(parseInt(stock), $(this));
         anhadirProductos();
         anhadirPrecio($(this));
         clonar($(this), $(this).clone());
@@ -42,12 +43,16 @@ $(document).ready(function () {
     }
     //funcion para restar el stock y cambiar el texto del nodo si stock 0 añade clase agotado
     function restarStock(cant, nodo) {
+        
+        
         if (cant < 0) {
             cant = 0
         };
         cant--;
+        
         if (cant > 0) {
             nodo.find('.stock').text("Stock " + cant);
+            
         } else {
             nodo.find('.stock').text("Stock " + cant);
             nodo.find('.stock').addClass("agotado");
@@ -124,28 +129,18 @@ $(document).ready(function () {
         //restar el precio del producto al total
         quitarPrecio($("#" + id));
 
-        nodo.parent().remove();
-        ponerDobleClick(nodo);
-
+        nodo.parent().remove();        
+        ponerDobleClick($("#"+id));
+        comprobarTamanho();
 
     }
     //funcion para poner dobleclick preguntar ana
     function ponerDobleClick(node) {
-
-        node.each(function () {
-            $('.item').unbind();
-            //console.log("hola");
-            var stock = getStock($(this).find(".stock").text());
+        node.unbind().on("dblclick",dobleClick);        
+         var stock = getStock(node.find(".stock").text());
             if (stock == 0) {
-                $('.item').unbind();
-                //console.log("entro inf");
-
-            } else {
-                //console.log("entro else");
-                $('.item').bind("dblclick", dobleClick);
-            }
-        })
-
+                node.unbind();
+        }
     }
     //funcion que vacia el carrito
     function vaciar() {
@@ -155,7 +150,7 @@ $(document).ready(function () {
 
     //funcion para comprobar si el carrito tiene mas de 4 elementos
     function comprobarCarrito() {
-        if ($('#cart_items').children().length >= 4) {
+        if ($('#cart_items').children().length > 4) {
             return true;
         } else {
 
@@ -166,11 +161,10 @@ $(document).ready(function () {
     //funcion para aumentar en 120px si hay mas de 4 elementos
     function aumentarTamanho() {
         if (comprobarCarrito()) {
-            var ancho = $("#cart_items").css("width");
-            var arrayancho = ancho.split("px");
-            var ancho = parseInt(arrayancho[0]) + 120;
-            $("#cart_items").css("width", ancho);
-            console.log(ancho);
+            var ancho = $("#cart_items").width();            
+            var ancho = parseInt(ancho) + 120;
+            $("#cart_items").width(ancho);
+            
         }
 
     }
@@ -184,13 +178,11 @@ $(document).ready(function () {
             case "btn_prev":
                 {
                     if (pos.left < posIni.left) {
-                        pos.left += 50;
+                        pos.left += 60;
                         $('#cart_items').offset({
                             top: pos.top,
                             left: pos.left
                         });
-
-
                     }
 
                     break;
@@ -201,14 +193,11 @@ $(document).ready(function () {
                     var sumaTamActual = parseInt(posIni.left)+parseInt(tamanhoIni);
                     
                     if(sumaTamInicial>sumaTamActual){
-                       pos.left -= 50;
+                       pos.left -= 60;
                     $('#cart_items').offset({
                         top: pos.top,
                         left: pos.left
                     }); 
-                        
-                 
-                    
                     break;
                     }
             }
@@ -216,6 +205,63 @@ $(document).ready(function () {
       }
 
 
+    }
+    function desplazar(esUltimo) {
+        
+        var pos  = $("#cart_items").offset()
+        var tamanho = $('#cart_items').css("width").split("px");
+        tamanho = tamanho[0];
+        switch ($(this).attr("id")) {
+            case "btn_prev":
+                {
+                    if (pos.left < posIni.left) {
+                        pos.left += 60;
+                        $('#cart_items').offset({
+                            top: pos.top,
+                            left: pos.left
+                        });
+                    }
+
+                    break;
+                }
+            case "btn_next":
+                {   
+                    var sumaTamInicial = parseInt(pos.left)+parseInt(tamanho);
+                    var sumaTamActual = parseInt(posIni.left)+parseInt(tamanhoIni);
+                    
+                    if(sumaTamInicial>sumaTamActual){
+                       pos.left -= 60;
+                    $('#cart_items').offset({
+                        top: pos.top,
+                        left: pos.left
+                    }); 
+                    break;
+                    }
+            }
+
+      }
+
+
+    }
+    //funcion que comprueba el numero de articulos y si es <=4 vuelve al tamaño inicial
+    function comprobarTamanho(){
+        var tamanho = $('#cart_items').children().length;
+        var contador = 0;
+        if(parseInt(tamanho)>=4){
+            var ancho = $('#cart_items').width() -120;
+            console.log($('#cart_items').offset());
+            $('#cart_items').width(ancho);
+            while(contador<3){
+                $("#btn_prev").trigger("click");
+                contador++;
+            }
+                
+            
+            
+            
+            
+        }
+        
     }
 
 });
