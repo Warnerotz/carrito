@@ -5,6 +5,10 @@ body
 	padding: 0;
 }
 
+.ui-button{
+    padding: 0px;
+}
+
 #item_container 
 {
 	width: 610px;
@@ -41,6 +45,7 @@ input.cantidad {
     width: 30px;
 }
 
+/*
 .delete
 {
 	background:url(../img/delete.png);
@@ -50,6 +55,7 @@ input.cantidad {
 {
 	background-image:url(../img/delete-hover.png);
 }
+*/
 
 a.minus, a.add, a.delete {
 	display: block;
