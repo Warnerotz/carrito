@@ -70,17 +70,36 @@ $(document).ready(function () {
 
     });
     
-    //drag and drop
+ 
+    
+
+
+    //ocultar el navigate
+    ocultarNavegacion();
+    transBotonesNav();
+    
+       //drag and drop
     $(".item").draggable(
-    {
-    revert : "true"
+    {   
+        helper: "clone",
+        revert : "true",
+        
     });
     
     $('#cart_items').droppable({
-        over: function( event, ui ) {
+        
+        accept:".item ",
+        activeClass : "drop-active",
+        hoverClass: "drop-hover",
+        
+        drop: function(e,ui){
+            $(ui.draggable).draggable({ revert: true });
+            $(ui.draggable).trigger("dblclick");
             
-            $('#cart_items').addClass('drop-hover');
-        }
+        },
+        
+       
+        
         
         
         
@@ -90,11 +109,6 @@ $(document).ready(function () {
     
     //---------------------------------------
     
-
-
-    //ocultar el navigate
-    ocultarNavegacion();
-    transBotonesNav();
 
     function dobleClick() {
         var stock = getStock($(this).find('.stock').text());
